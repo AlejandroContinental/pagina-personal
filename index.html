@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rodrigo Zavala | Estudiante de Ingeniería en Sistemas</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --light: #ecf0f1;
+            --dark: #1a252f;
+            --accent: #e74c3c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--dark);
+            line-height: 1.6;
+            background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+            z-index: -1;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L100,0 L100,100 L0,100 Z" /></svg>');
+            background-size: cover;
+            z-index: 1;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255,255,255,0.3);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+            border-color: rgba(255,255,255,0.5);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 0.8rem;
+            font-weight: 300;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            color: white;
+            background: rgba(255,255,255,0.2);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .social-links a:hover {
+            background: rgba(255,255,255,0.4);
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            backdrop-filter: blur(5px);
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+            background-color: white;
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 3px solid var(--secondary);
+            font-size: 1.8rem;
+            position: relative;
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .skill {
+            background: linear-gradient(135deg, #f5f7fa, #e4e8eb);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            color: var(--dark);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .skill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #e4e8eb, #d8dde1);
+        }
+        
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .project-card {
+            border: 1px solid #e0e6ed;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #e0e6ed;
+        }
+        
+        .project-info {
+            padding: 1.5rem;
+        }
+        
+        .project-info h3 {
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+        
+        .project-info p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--secondary), #2980b9);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+            background: linear-gradient(135deg, #2980b9, var(--secondary));
+        }
+        
+        .hobbies-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .hobby-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .hobby-item:hover {
+            background: #e9f5ff;
+            transform: translateY(-3px);
+        }
+        
+        .hobby-icon {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--dark), #121a24);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+        
+        footer p {
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+        
+        footer p:first-child {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            opacity: 1;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--secondary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .projects {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 1.8rem;
+            }
+            
+            .hobbies-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="foto.webp" alt="Rodrigo Josue Alejandro Zavala" class="profile-img">
+            <h1>Rodrigo Josue Alejandro Zavala</h1>
+            <p class="subtitle">Estudiante de Ingeniería en Sistemas e Informática</p>
+            <p class="subtitle">Asignatura: Construcción de Software</p>
+            <p>Apasionado por el desarrollo de soluciones tecnológicas innovadoras</p>
+            
+            <div class="social-links">
+                <a href="https://github.com/AlejandroContinental" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="mailto:73079776@continental.edu.pe" title="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section id="about">
+            <h2>Sobre Mí</h2>
+            <p>¡Hola! Soy Rodrigo, estudiante de Ingeniería en Sistemas en la Universidad Continental. Desde mi adolescencia me ha apasionado la tecnología y la programación, especialmente el potencial que tiene para resolver problemas complejos y mejorar la vida de las personas.</p>
+            <p>Actualmente en mi séptimo año de estudios, he desarrollado sólidas habilidades en programación, diseño de software y trabajo en equipo. Mi lenguaje favorito es C++, aunque también tengo experiencia con Java. Me siento especialmente atraído por el desarrollo del backend y los frameworks de desarrollo web, donde puedo aplicar mis habilidades para crear soluciones robustas y eficientes.</p>
+        </section>
+        
+        <section id="skills">
+            <h2>Conocimientos Técnicos</h2>
+            <div class="skills-container">
+                <span class="skill"><i class="fab fa-java"></i> Java</span>
+                <span class="skill"><i class="fas fa-code"></i> C++</span>
+                <span class="skill"><i class="fab fa-html5"></i> HTML/CSS</span>
+                <span class="skill"><i class="fas fa-database"></i> SQL</span>
+                <span class="skill"><i class="fab fa-git-alt"></i> Git</span>
+                <span class="skill"><i class="fas fa-server"></i> Bases de Datos</span>
+                <span class="skill"><i class="fab fa-angular"></i> Angular</span>
+                <span class="skill"><i class="fas fa-terminal"></i> Linux</span>
+                <span class="skill"><i class="fas fa-network-wired"></i> Redes</span>
+            </div>
+        </section>
+        
+        <section id="projects">
+            <h2>Proyectos Académicos</h2>
+            <div class="projects">
+                <div class="project-card">
+                    <div class="project-info">
+                        <h3>Proyecto Llankay</h3>
+                        <p>Aplicación para Windows que permite a los técnicos del Cusco ofrecer sus servicios de manera rápida y segura. Desarrollada con C# y .NET Framework, incluye sistema de calificaciones y geolocalización.</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-info">
+                        <h3>Autonet</h3>
+                        <p>Programa hecho en C++ para Ubuntu server que automatiza la configuración de interfaces de red, enrutamiento y servicios DHCP. Ideal para administradores de red que necesitan configurar múltiples equipos rápidamente.</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-info">
+                        <h3>Proyecto VOGUI</h3>
+                        <p>Asistente de voz que describe el entorno y objetos para personas con discapacidad visual, desarrollado con Arduino, sensores ultrasónicos y síntesis de voz. Ganador del Hackaton de Innovación 2023.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="Pasatiempos">
+            <h2>Pasatiempos e Intereses</h2>
+            <p>Cuando no estoy programando, disfruto de varias actividades que complementan mi formación y me ayudan a mantener un buen equilibrio entre trabajo y vida personal:</p>
+            
+            <div class="hobbies-list">
+                <div class="hobby-item">
+                    <div class="hobby-icon"><i class="fas fa-tv"></i></div>
+                    <p>Ver anime</p>
+                </div>
+                <div class="hobby-item">
+                    <div class="hobby-icon"><i class="fas fa-book-open"></i></div>
+                    <p>Leer Manhwa</p>
+                </div>
+                <div class="hobby-item">
+                    <div class="hobby-icon"><i class="fas fa-headphones"></i></div>
+                    <p>Música en alta calidad</p>
+                </div>
+                <div class="hobby-item">
+                    <div class="hobby-icon"><i class="fas fa-gamepad"></i></div>
+                    <p>Videojuegos de mundo abierto y rol</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>© 2025 Rodrigo Josue Alejandro Zavala - Estudiante de Ingeniería en Sistemas</p>
+        <p>Contacto: 73079776@continental.edu.pe | Tel: +51 967522429</p>
+        <p>Universidad Continental - Construcción de Software</p>
+    </footer>
+    
+    <a href="#" class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></a>
+    
+    <script>
+        // Botón para volver arriba
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
